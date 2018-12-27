@@ -81,7 +81,7 @@ void DestroyThreadPool(ThreadPool *Pool)
   {
     CriticalSectionStart(&PoolCreateSync.CritSection); 
 
-    if (Pool==GlobalPool && GlobalPoolUseCount > 0 && --GlobalPoolUseCount == 0)
+    if (GlobalPoolUseCount > 0 && --GlobalPoolUseCount == 0 && Pool==GlobalPool)
       delete GlobalPool;
 
     // To correctly work in multithreaded environment UnRAR.dll creates

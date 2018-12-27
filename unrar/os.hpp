@@ -32,7 +32,9 @@
 #define STRICT 1
 #endif
 
+#ifndef UNICODE
 #define UNICODE
+#endif
 #undef WINVER
 #undef _WIN32_WINNT
 #define WINVER 0x0501
