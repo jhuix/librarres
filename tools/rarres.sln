@@ -1,0 +1,74 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2042
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "rarres", "rarres.vcxproj", "{52183F8C-A8C4-4ADD-9343-04C16BCE1199}"
+	ProjectSection(ProjectDependencies) = postProject
+		{E815C46C-36C4-499F-BBC2-E772C6B17971} = {E815C46C-36C4-499F-BBC2-E772C6B17971}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "librarres", "..\librarres.vcxproj", "{E815C46C-36C4-499F-BBC2-E772C6B17971}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug_DLL|x64 = Debug_DLL|x64
+		Debug_DLL|x86 = Debug_DLL|x86
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		release_nocrypt_dll|x64 = release_nocrypt_dll|x64
+		release_nocrypt_dll|x86 = release_nocrypt_dll|x86
+		release_nocrypt|x64 = release_nocrypt|x64
+		release_nocrypt|x86 = release_nocrypt|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{52183F8C-A8C4-4ADD-9343-04C16BCE1199}.Debug_DLL|x64.ActiveCfg = Debug_DLL|x64
+		{52183F8C-A8C4-4ADD-9343-04C16BCE1199}.Debug_DLL|x64.Build.0 = Debug_DLL|x64
+		{52183F8C-A8C4-4ADD-9343-04C16BCE1199}.Debug_DLL|x86.ActiveCfg = Debug_DLL|Win32
+		{52183F8C-A8C4-4ADD-9343-04C16BCE1199}.Debug_DLL|x86.Build.0 = Debug_DLL|Win32
+		{52183F8C-A8C4-4ADD-9343-04C16BCE1199}.Debug|x64.ActiveCfg = Debug|x64
+		{52183F8C-A8C4-4ADD-9343-04C16BCE1199}.Debug|x64.Build.0 = Debug|x64
+		{52183F8C-A8C4-4ADD-9343-04C16BCE1199}.Debug|x86.ActiveCfg = Debug|Win32
+		{52183F8C-A8C4-4ADD-9343-04C16BCE1199}.Debug|x86.Build.0 = Debug|Win32
+		{52183F8C-A8C4-4ADD-9343-04C16BCE1199}.release_nocrypt_dll|x64.ActiveCfg = release_nocrypt_dll|x64
+		{52183F8C-A8C4-4ADD-9343-04C16BCE1199}.release_nocrypt_dll|x64.Build.0 = release_nocrypt_dll|x64
+		{52183F8C-A8C4-4ADD-9343-04C16BCE1199}.release_nocrypt_dll|x86.ActiveCfg = release_nocrypt_dll|Win32
+		{52183F8C-A8C4-4ADD-9343-04C16BCE1199}.release_nocrypt_dll|x86.Build.0 = release_nocrypt_dll|Win32
+		{52183F8C-A8C4-4ADD-9343-04C16BCE1199}.release_nocrypt|x64.ActiveCfg = release_nocrypt|x64
+		{52183F8C-A8C4-4ADD-9343-04C16BCE1199}.release_nocrypt|x64.Build.0 = release_nocrypt|x64
+		{52183F8C-A8C4-4ADD-9343-04C16BCE1199}.release_nocrypt|x86.ActiveCfg = release_nocrypt|Win32
+		{52183F8C-A8C4-4ADD-9343-04C16BCE1199}.release_nocrypt|x86.Build.0 = release_nocrypt|Win32
+		{52183F8C-A8C4-4ADD-9343-04C16BCE1199}.Release|x64.ActiveCfg = Release|x64
+		{52183F8C-A8C4-4ADD-9343-04C16BCE1199}.Release|x64.Build.0 = Release|x64
+		{52183F8C-A8C4-4ADD-9343-04C16BCE1199}.Release|x86.ActiveCfg = Release|Win32
+		{52183F8C-A8C4-4ADD-9343-04C16BCE1199}.Release|x86.Build.0 = Release|Win32
+		{E815C46C-36C4-499F-BBC2-E772C6B17971}.Debug_DLL|x64.ActiveCfg = Debug_DLL|x64
+		{E815C46C-36C4-499F-BBC2-E772C6B17971}.Debug_DLL|x64.Build.0 = Debug_DLL|x64
+		{E815C46C-36C4-499F-BBC2-E772C6B17971}.Debug_DLL|x86.ActiveCfg = Debug_DLL|Win32
+		{E815C46C-36C4-499F-BBC2-E772C6B17971}.Debug_DLL|x86.Build.0 = Debug_DLL|Win32
+		{E815C46C-36C4-499F-BBC2-E772C6B17971}.Debug|x64.ActiveCfg = Debug|x64
+		{E815C46C-36C4-499F-BBC2-E772C6B17971}.Debug|x64.Build.0 = Debug|x64
+		{E815C46C-36C4-499F-BBC2-E772C6B17971}.Debug|x86.ActiveCfg = Debug|Win32
+		{E815C46C-36C4-499F-BBC2-E772C6B17971}.Debug|x86.Build.0 = Debug|Win32
+		{E815C46C-36C4-499F-BBC2-E772C6B17971}.release_nocrypt_dll|x64.ActiveCfg = release_nocrypt_dll|x64
+		{E815C46C-36C4-499F-BBC2-E772C6B17971}.release_nocrypt_dll|x64.Build.0 = release_nocrypt_dll|x64
+		{E815C46C-36C4-499F-BBC2-E772C6B17971}.release_nocrypt_dll|x86.ActiveCfg = release_nocrypt_dll|Win32
+		{E815C46C-36C4-499F-BBC2-E772C6B17971}.release_nocrypt_dll|x86.Build.0 = release_nocrypt_dll|Win32
+		{E815C46C-36C4-499F-BBC2-E772C6B17971}.release_nocrypt|x64.ActiveCfg = release_nocrypt|x64
+		{E815C46C-36C4-499F-BBC2-E772C6B17971}.release_nocrypt|x64.Build.0 = release_nocrypt|x64
+		{E815C46C-36C4-499F-BBC2-E772C6B17971}.release_nocrypt|x86.ActiveCfg = release_nocrypt|Win32
+		{E815C46C-36C4-499F-BBC2-E772C6B17971}.release_nocrypt|x86.Build.0 = release_nocrypt|Win32
+		{E815C46C-36C4-499F-BBC2-E772C6B17971}.Release|x64.ActiveCfg = Release|x64
+		{E815C46C-36C4-499F-BBC2-E772C6B17971}.Release|x64.Build.0 = Release|x64
+		{E815C46C-36C4-499F-BBC2-E772C6B17971}.Release|x86.ActiveCfg = Release|Win32
+		{E815C46C-36C4-499F-BBC2-E772C6B17971}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8C27F91B-4C3D-4DA9-889B-C1634BA9AA06}
+	EndGlobalSection
+EndGlobal

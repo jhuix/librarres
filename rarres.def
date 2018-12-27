@@ -1,0 +1,4 @@
+EXPORTS
+  CreateRarRes
+  ExtractFileA
+  ExtractFileW

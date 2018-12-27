@@ -1,0 +1,192 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="unrar\archive.cpp">
+      <Filter>unrar\source files</Filter>
+    </ClCompile>
+    <ClCompile Include="unrar\arcread.cpp">
+      <Filter>unrar\source files</Filter>
+    </ClCompile>
+    <ClCompile Include="unrar\blake2s.cpp">
+      <Filter>unrar\source files</Filter>
+    </ClCompile>
+    <ClCompile Include="unrar\cmddata.cpp">
+      <Filter>unrar\source files</Filter>
+    </ClCompile>
+    <ClCompile Include="unrar\consio.cpp">
+      <Filter>unrar\source files</Filter>
+    </ClCompile>
+    <ClCompile Include="unrar\crc.cpp">
+      <Filter>unrar\source files</Filter>
+    </ClCompile>
+    <ClCompile Include="unrar\encname.cpp">
+      <Filter>unrar\source files</Filter>
+    </ClCompile>
+    <ClCompile Include="unrar\crypt.cpp">
+      <Filter>unrar\source files</Filter>
+    </ClCompile>
+    <ClCompile Include="unrar\errhnd.cpp">
+      <Filter>unrar\source files</Filter>
+    </ClCompile>
+    <ClCompile Include="unrar\extinfo.cpp">
+      <Filter>unrar\source files</Filter>
+    </ClCompile>
+    <ClCompile Include="unrar\filcreat.cpp">
+      <Filter>unrar\source files</Filter>
+    </ClCompile>
+    <ClCompile Include="unrar\filefn.cpp">
+      <Filter>unrar\source files</Filter>
+    </ClCompile>
+    <ClCompile Include="unrar\file.cpp">
+      <Filter>unrar\source files</Filter>
+    </ClCompile>
+    <ClCompile Include="unrar\filestr.cpp">
+      <Filter>unrar\source files</Filter>
+    </ClCompile>
+    <ClCompile Include="unrar\find.cpp">
+      <Filter>unrar\source files</Filter>
+    </ClCompile>
+    <ClCompile Include="unrar\getbits.cpp">
+      <Filter>unrar\source files</Filter>
+    </ClCompile>
+    <ClCompile Include="unrar\global.cpp">
+      <Filter>unrar\source files</Filter>
+    </ClCompile>
+    <ClCompile Include="unrar\hash.cpp">
+      <Filter>unrar\source files</Filter>
+    </ClCompile>
+    <ClCompile Include="unrar\headers.cpp">
+      <Filter>unrar\source files</Filter>
+    </ClCompile>
+    <ClCompile Include="unrar\isnt.cpp">
+      <Filter>unrar\source files</Filter>
+    </ClCompile>
+    <ClCompile Include="unrar\match.cpp">
+      <Filter>unrar\source files</Filter>
+    </ClCompile>
+    <ClCompile Include="unrar\options.cpp">
+      <Filter>unrar\source files</Filter>
+    </ClCompile>
+    <ClCompile Include="unrar\pathfn.cpp">
+      <Filter>unrar\source files</Filter>
+    </ClCompile>
+    <ClCompile Include="unrar\qopen.cpp">
+      <Filter>unrar\source files</Filter>
+    </ClCompile>
+    <ClCompile Include="unrar\rar.cpp">
+      <Filter>unrar\source files</Filter>
+    </ClCompile>
+    <ClCompile Include="unrar\rarpch.cpp">
+      <Filter>unrar\source files</Filter>
+    </ClCompile>
+    <ClCompile Include="unrar\rarvm.cpp">
+      <Filter>unrar\source files</Filter>
+    </ClCompile>
+    <ClCompile Include="unrar\rawread.cpp">
+      <Filter>unrar\source files</Filter>
+    </ClCompile>
+    <ClCompile Include="unrar\rdwrfn.cpp">
+      <Filter>unrar\source files</Filter>
+    </ClCompile>
+    <ClCompile Include="unrar\rijndael.cpp">
+      <Filter>unrar\source files</Filter>
+    </ClCompile>
+    <ClCompile Include="unrar\rs.cpp">
+      <Filter>unrar\source files</Filter>
+    </ClCompile>
+    <ClCompile Include="unrar\rs16.cpp">
+      <Filter>unrar\source files</Filter>
+    </ClCompile>
+    <ClCompile Include="unrar\scantree.cpp">
+      <Filter>unrar\source files</Filter>
+    </ClCompile>
+    <ClCompile Include="unrar\secpassword.cpp">
+      <Filter>unrar\source files</Filter>
+    </ClCompile>
+    <ClCompile Include="unrar\sha1.cpp">
+      <Filter>unrar\source files</Filter>
+    </ClCompile>
+    <ClCompile Include="unrar\sha256.cpp">
+      <Filter>unrar\source files</Filter>
+    </ClCompile>
+    <ClCompile Include="unrar\smallfn.cpp">
+      <Filter>unrar\source files</Filter>
+    </ClCompile>
+    <ClCompile Include="unrar\strfn.cpp">
+      <Filter>unrar\source files</Filter>
+    </ClCompile>
+    <ClCompile Include="unrar\strlist.cpp">
+      <Filter>unrar\source files</Filter>
+    </ClCompile>
+    <ClCompile Include="unrar\system.cpp">
+      <Filter>unrar\source files</Filter>
+    </ClCompile>
+    <ClCompile Include="unrar\threadpool.cpp">
+      <Filter>unrar\source files</Filter>
+    </ClCompile>
+    <ClCompile Include="unrar\timefn.cpp">
+      <Filter>unrar\source files</Filter>
+    </ClCompile>
+    <ClCompile Include="unrar\ui.cpp">
+      <Filter>unrar\source files</Filter>
+    </ClCompile>
+    <ClCompile Include="unrar\unicode.cpp">
+      <Filter>unrar\source files</Filter>
+    </ClCompile>
+    <ClCompile Include="unrar\unpack.cpp">
+      <Filter>unrar\source files</Filter>
+    </ClCompile>
+    <ClCompile Include="unrar\volume.cpp">
+      <Filter>unrar\source files</Filter>
+    </ClCompile>
+    <ClCompile Include="unrar\extract.cpp">
+      <Filter>unrar\source files</Filter>
+    </ClCompile>
+    <ClCompile Include="unrar\dll.cpp">
+      <Filter>unrar\source files</Filter>
+    </ClCompile>
+    <ClCompile Include="unrar\list.cpp">
+      <Filter>unrar\source files</Filter>
+    </ClCompile>
+    <ClCompile Include="rarres.cpp" />
+    <ClCompile Include="respak.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="unrar">
+      <UniqueIdentifier>{b42e5251-c7a4-4ef9-b9ab-470829d83c74}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="unrar\source files">
+      <UniqueIdentifier>{9958e9e5-c0c9-4d38-bb41-411bb27a71d1}</UniqueIdentifier>
+      <Extensions>*.cpp;*.cc;*c</Extensions>
+    </Filter>
+    <Filter Include="unrar\include files">
+      <UniqueIdentifier>{acf684f8-87cf-41ce-ab39-dedcbc14eaa2}</UniqueIdentifier>
+      <Extensions>*.hpp;*.h</Extensions>
+    </Filter>
+    <Filter Include="resource files">
+      <UniqueIdentifier>{18bd0335-a6e6-4f26-8576-23a0ffe2d9d9}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="unrar\rar.hpp">
+      <Filter>unrar\include files</Filter>
+    </ClInclude>
+    <ClInclude Include="librarres.h" />
+    <ClInclude Include="rarres.h" />
+    <ClInclude Include="librespak.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="rarres.def">
+      <Filter>resource files</Filter>
+    </None>
+    <None Include="VERSION">
+      <Filter>resource files</Filter>
+    </None>
+    <None Include="LICENSE" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="rarres.rc">
+      <Filter>resource files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>

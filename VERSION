@@ -1,0 +1,15 @@
+//VERSIONINFO  marco
+#define VERSION_MAJOR     1
+#define VERSION_MINOR     0
+#define VERSION_BUILD     0
+#define VERSION_PATCH     1227
+
+#define _MACROTOSTINRG(a) #a
+#define _UNION_VERSION(a,b,c,d)  _MACROTOSTINRG(a.b.c.d)
+#define PRODUCT_VERSION   _UNION_VERSION(VERSION_MAJOR,VERSION_MINOR,VERSION_BUILD,VERSION_PATCH)
+#define COMPANY_FULLNAME  "Jhuix Software"
+#define PRODUCT_FULLNAME  "Rar Res library"
+#define PRODUCT_GLOBALNAME "Rar Res library"
+#define PRODUCT_COPYRIGHT "Jhuix 2018, Copyright All."
+#define PRODUCT_SHORTNAME "librarres"
+#define PRODUCT_FILENAME  "librarres.dll"
