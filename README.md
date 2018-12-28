@@ -5,7 +5,7 @@ librarres 工程是一读取由RAR压缩文件做为资源包的库。
 
 ## UnRAR
 
-RAR文件分析和解压缩采用 [www.rarlab.com](https://www.rarlab.com) 的解压缩[UnRAR 5.6.8](https://www.rarlab.com/rar/unrarsrc-5.6.8.tar.gz)开源版本源码。
+RAR文件分析和解压缩采用 [www.rarlab.com](https://www.rarlab.com) 的解压缩[UnRAR 5.6.8](https://www.rarlab.com/rar/unrarsrc-5.6.8.tar.gz)开源版本源码, 该部分源码请遵守它相关的开源许可。
 
 ## Example
 
