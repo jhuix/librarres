@@ -35,7 +35,7 @@
 namespace RARRES {
 
   bool PASCAL ExtractFileA(const char* srcfile, const char* filename, const char* destfile) {
-    JRES::IRes* rr = CreateRarRes(true);
+    JRES::IRes* rr = JRES::CreateRarRes(true);
     if (!rr || !rr->Load(srcfile, '\\'))
       return false;
 
@@ -59,7 +59,7 @@ namespace RARRES {
   }
 
   bool PASCAL ExtractFileW(const wchar_t* srcfile, const wchar_t* filename, const wchar_t* destfile) {
-    JRES::IRes* rr = CreateRarRes(true);
+    JRES::IRes* rr = JRES::CreateRarRes(true);
     if (!rr || !rr->Load(srcfile, L'\\'))
       return false;
 

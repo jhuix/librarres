@@ -217,7 +217,7 @@ namespace RARRES {
     return Extract(rhd, buf, bufsize);
   }
 
-  void* CRarRes::Extract(RARRES_FILEHEADER* rhd, char** buf, size_t& bufsize){
+  void* CRarRes::Extract(RARRES_FILEHEADER* rhd, char** buf, size_t& bufsize) {
     if (!buf || ((*buf) && rhd->UnpSize > (int64)bufsize)) {
       bufsize = (size_t)rhd->UnpSize;
       ErrHandler.SetErrorCode(RARX_SUCCESS);
@@ -366,8 +366,12 @@ namespace RARRES {
     return ErrHandler.GetErrorCode();
   }
 
-  JRES::IRes* PASCAL CreateRarRes(bool ignorecase) {
-    return new CRarRes(ignorecase);
+};
+
+namespace JRES {
+
+  IRes* PASCAL CreateRarRes(bool ignorecase) {
+    return new RARRES::CRarRes(ignorecase);
   }
 
 };

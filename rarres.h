@@ -58,6 +58,8 @@ namespace RARRES {
     ~CRarRes();
 
     virtual void Release();
+    //path_sep value of 0 is default internal path separator.
+    //RAR: default internal path separator is '\\'
     virtual bool Load(const char* filename, char path_sep);
     virtual bool Load(const wchar* filename, wchar_t path_sep);
     virtual void* LoadResource(const char* id, char** buf, size_t& bufsize);

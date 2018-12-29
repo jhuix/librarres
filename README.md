@@ -12,7 +12,7 @@ RAR文件分析和解压缩采用 [www.rarlab.com](https://www.rarlab.com) 的�
 #### 1. 获取一个test.rar资源包里的名为"skin\\ui\\index.html"的内容至缓存中:
 
 ```
-JRES::IRes* rarres = CreateRarRes(true);
+JRES::IRes* rarres = JRES::CreateRarRes(true);
 if (rarres) {
     if (rarres->Load("test.rar", 0)) {
         char* buf = nullptr;
@@ -30,7 +30,7 @@ if (rarres) {
 #### 2. 在windows平台下，获取一个test.rar资源包里的名为"skin/img/caotion.png"的内容至IStream中:
 
 ```
-JRES::IRes* rarres = CreateRarRes(false);
+JRES::IRes* rarres = JRES::CreateRarRes(false);
 if (rarres) {
     if (rarres->Load("test.rar", '/')) {
         IStream* res = rarres->LoadResource("skin/img/caotion.png");
@@ -48,4 +48,4 @@ if (rarres) {
 
 [MIT](http://opensource.org/licenses/MIT)
 
-Copyright (c) 2018-present, [Jhuix](jhuix0117@gmail.com) (Hui Jin)
+Copyright (c) 2018-present, [Jhuix](mailto:jhuix0117@gmail.com) (Hui Jin)

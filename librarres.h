@@ -32,8 +32,7 @@
 
 #include "jres.h"
 
-namespace RARRES {
-
+namespace JRES {
 
 #ifdef __cplusplus
   extern "C" {
