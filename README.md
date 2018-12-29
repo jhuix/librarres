@@ -12,9 +12,9 @@ RAR文件分析和解压缩采用 [www.rarlab.com](https://www.rarlab.com) 的�
 #### 1. 获取一个test.rar资源包里的名为"skin\\ui\\index.html"的内容至缓存中:
 
 ```
-IRarRes* rarres = CreateRarRes();
+JRES::IRes* rarres = CreateRarRes(true);
 if (rarres) {
-    if (rarres->Load("test.rar")) {
+    if (rarres->Load("test.rar", 0)) {
         char* buf = nullptr;
         size_t bufsize = 0;
         void* res = rarres->LoadResource("skin\\ui\\index.html", &buf, bufsize);
@@ -27,13 +27,13 @@ if (rarres) {
 }
 ```
 
-#### 2. 在windows平台下，获取一个test.rar资源包里的名为"skin\\img\\caotion.png"的内容至IStream中:
+#### 2. 在windows平台下，获取一个test.rar资源包里的名为"skin/img/caotion.png"的内容至IStream中:
 
 ```
-IRarRes* rarres = CreateRarRes();
+JRES::IRes* rarres = CreateRarRes(false);
 if (rarres) {
-    if (rarres->Load("test.rar")) {
-        IStream* res = rarres->LoadResource("skin\\img\\caotion.png");
+    if (rarres->Load("test.rar", '/')) {
+        IStream* res = rarres->LoadResource("skin/img/caotion.png");
         if (res) {
             //TO DO USE IStream interface methods of "res";
             //For examples: <Seek>|<Read>|<Write> methods etc.
