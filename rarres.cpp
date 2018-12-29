@@ -32,12 +32,13 @@
 
 namespace RARRES {
 
-  CRarRes::CRarRes()
+  CRarRes::CRarRes(bool ignorecase)
     : unp_(nullptr)
     , arc_(&cmd_)
     , flags_(0)
     , total_packsize_(0)
-    , total_unpsize_(0) {
+    , total_unpsize_(0)
+    , ignorecase_(ignorecase) {
   }
 
   CRarRes::~CRarRes() {
@@ -50,9 +51,10 @@ namespace RARRES {
       unp_ = nullptr;
     }
     arc_.Close();
-    for (auto it : fileheaders_)
+    for (auto it : fileheadersW_)
       delete it.second;
-    fileheaders_.clear();
+    fileheadersW_.clear();
+    fileheadersA_.clear();
     flags_ = 0;
     total_packsize_ = 0;
     total_unpsize_ = 0;
@@ -62,13 +64,15 @@ namespace RARRES {
     delete this;
   }
 
-  bool CRarRes::Load(const char* filename) {
+  bool CRarRes::Load(const char* filename, char path_sep) {
     wchar_t FileName[NM];
-    CharToWide(filename, FileName, ASIZE(FileName));
-    return Load(FileName);
+    UtfToWide(filename, FileName, ASIZE(FileName));
+    wchar_t sep = 0;
+    ((char*)&sep)[0] = path_sep;
+    return Load(FileName, sep);
   }
 
-  bool CRarRes::Load(const wchar_t* filename) {
+  bool CRarRes::Load(const wchar_t* filename, wchar_t path_sep) {
     Clear();
     cmd_.Init();
     cmd_.AddArcName(filename);
@@ -106,7 +110,7 @@ namespace RARRES {
       flags_ |= 0x80;
     if (arc_.FirstVolume)
       flags_ |= 0x100;
-    return ListFiles();
+    return ListFiles(path_sep);
   }
 
   bool CRarRes::CheckUnpVer()
@@ -132,7 +136,7 @@ namespace RARRES {
     return !WrongVer;
   }
 
-  bool CRarRes::ListFiles() {
+  bool CRarRes::ListFiles(wchar_t path_sep) {
     if (!arc_.IsOpened())
       return false;
 
@@ -144,7 +148,7 @@ namespace RARRES {
       HEADER_TYPE HeaderType = arc_.GetHeaderType();
       switch (HeaderType) {
       case HEAD_FILE:
-        ListFileHeader(arc_.FileHead);
+        ListFileHeader(arc_.FileHead, path_sep);
         if (!arc_.FileHead.SplitBefore)
         {
           total_unpsize_ += arc_.FileHead.UnpSize;
@@ -153,7 +157,7 @@ namespace RARRES {
         total_packsize_ += arc_.FileHead.PackSize;
         break;
       case HEAD_SERVICE:
-        ListFileHeader(arc_.SubHead);
+        ListFileHeader(arc_.SubHead, path_sep);
         break;
       }
       arc_.SeekToNext();
@@ -161,17 +165,34 @@ namespace RARRES {
     return (bool)(FileCount > 0);
   }
 
-  void CRarRes::ListFileHeader(FileHeader &hd) {
+  void CRarRes::ListFileHeader(FileHeader &hd, wchar_t path_sep) {
     if (!hd.Dir) {
-      RES_FILEHEADER* rhd = new RES_FILEHEADER;
+      RARRES_FILEHEADER* rhd = new RARRES_FILEHEADER;
       *((BlockHeader*)rhd) = hd;
       rhd->Pos = arc_.CurBlockPos;
       rhd->PackSize = hd.PackSize < 0 ? 0 : hd.PackSize;
       rhd->UnpSize = hd.UnpSize < 0 ? 0 : hd.UnpSize;
+      rhd->FileName = hd.FileName;
+      //Path sep default value is L'\\'
+      if ((path_sep && path_sep != L'\\')) {
+        wchar_t* ch = (wchar_t*)hd.FileName;
+        while (*ch) {
+          if (L'\\' == *ch) *ch = path_sep;
+          ++ch;
+        }
+      }
+      if (ignorecase_) {
+        wchar_t* ch = (wchar_t*)hd.FileName;
+        while (*ch) {
+          if ((*ch) >= L'A' && (*ch) <= L'Z')
+            *ch = (*ch) + 20;
+          ++ch;
+        }
+      }
+      fileheadersW_[hd.FileName] = rhd;
       char NameA[NM];
-      WideToChar(hd.FileName, NameA, ASIZE(NameA));
-      rhd->FileName = NameA;
-      fileheaders_[rhd->FileName] = rhd;
+      WideToUtf(hd.FileName, NameA, ASIZE(NameA));
+      fileheadersA_[NameA] = rhd;
     }
   }
 
@@ -181,18 +202,22 @@ namespace RARRES {
       return nullptr;
     }
 
-    std::map<std::string, RES_FILEHEADER* >::iterator it = fileheaders_.find(id);
-    if (it == fileheaders_.end()) {
+    std::map<std::string, RARRES_FILEHEADER* >::iterator it = fileheadersA_.find(id);
+    if (it == fileheadersA_.end()) {
       ErrHandler.SetErrorCode(RARX_NOFILES);
       return nullptr;
     }
 
-    RES_FILEHEADER* rhd = it->second;
+    RARRES_FILEHEADER* rhd = it->second;
     if (NULL == rhd) {
       ErrHandler.SetErrorCode(RARX_NOFILES);
       return nullptr;
     }
 
+    return Extract(rhd, buf, bufsize);
+  }
+
+  void* CRarRes::Extract(RARRES_FILEHEADER* rhd, char** buf, size_t& bufsize){
     if (!buf || ((*buf) && rhd->UnpSize > (int64)bufsize)) {
       bufsize = (size_t)rhd->UnpSize;
       ErrHandler.SetErrorCode(RARX_SUCCESS);
@@ -267,9 +292,24 @@ namespace RARRES {
   }
 
   void* CRarRes::LoadResource(const wchar_t* id, char** buf, size_t& bufsize) {
-    char ida[NM];
-    WideToChar(id, ida, ASIZE(ida));
-    return LoadResource(ida, buf, bufsize);
+    if (!arc_.IsOpened()) {
+      ErrHandler.SetErrorCode(RARX_OPEN);
+      return nullptr;
+    }
+
+    std::map<std::wstring, RARRES_FILEHEADER* >::iterator it = fileheadersW_.find(id);
+    if (it == fileheadersW_.end()) {
+      ErrHandler.SetErrorCode(RARX_NOFILES);
+      return nullptr;
+    }
+
+    RARRES_FILEHEADER* rhd = it->second;
+    if (NULL == rhd) {
+      ErrHandler.SetErrorCode(RARX_NOFILES);
+      return nullptr;
+    }
+
+    return Extract(rhd, buf, bufsize);
   }
 
 #ifdef _WIN32
@@ -279,7 +319,6 @@ namespace RARRES {
     if (!res_size)
       return nullptr;
 
-    HRESULT hr = E_FAIL;
     IStream* stream = nullptr;
     HGLOBAL buffer_handler = ::GlobalAlloc(GMEM_MOVEABLE, res_size);
     if (buffer_handler) {
@@ -297,9 +336,25 @@ namespace RARRES {
   }
 
   IStream* CRarRes::LoadResource(const wchar_t* id) {
-    char ida[NM];
-    WideToChar(id, ida, ASIZE(ida));
-    return LoadResource(ida);
+    size_t res_size = 0;
+    LoadResource(id, nullptr, res_size);
+    if (!res_size)
+      return nullptr;
+
+    IStream* stream = nullptr;
+    HGLOBAL buffer_handler = ::GlobalAlloc(GMEM_MOVEABLE, res_size);
+    if (buffer_handler) {
+      void* buffer = ::GlobalLock(buffer_handler);
+      if (buffer) {
+        void* res = LoadResource(id, (char**)&buffer, res_size);
+        if (res) {
+          ::CreateStreamOnHGlobal(buffer_handler, TRUE, &stream);
+          FreeResource(res);
+        }
+        ::GlobalUnlock(buffer_handler);
+      }
+    }
+    return stream;
   }
 #endif
 
@@ -311,8 +366,8 @@ namespace RARRES {
     return ErrHandler.GetErrorCode();
   }
 
-  IRarRes* PASCAL CreateRarRes() {
-    return new CRarRes();
+  JRES::IRes* PASCAL CreateRarRes(bool ignorecase) {
+    return new CRarRes(ignorecase);
   }
 
 };

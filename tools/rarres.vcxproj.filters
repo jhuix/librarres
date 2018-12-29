@@ -17,6 +17,9 @@
     <ClInclude Include="..\librespak.h">
       <Filter>include files</Filter>
     </ClInclude>
+    <ClInclude Include="..\jres.h">
+      <Filter>include files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">

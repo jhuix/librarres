@@ -707,6 +707,7 @@
     <ClCompile Include="unrar\volume.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="jres.h" />
     <ClInclude Include="librarres.h" />
     <ClInclude Include="librespak.h" />
     <ClInclude Include="rarres.h" />

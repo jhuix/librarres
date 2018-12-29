@@ -45,21 +45,21 @@ namespace RARRES {
 
 #endif  // !DISALLOW_COPY_AND_ASSIGN
   
-  struct RES_FILEHEADER : BlockHeader {
+  struct RARRES_FILEHEADER : BlockHeader {
     int64 Pos;
     int64 PackSize;
     int64 UnpSize;
-    std::string FileName;
+    std::wstring FileName;
   };
 
-  class CRarRes : public IRarRes {
+  class CRarRes : public JRES::IRes {
   public:
-    explicit CRarRes();
+    explicit CRarRes(bool ignorecase = true);
     ~CRarRes();
 
     virtual void Release();
-    virtual bool Load(const char* filename);
-    virtual bool Load(const wchar* filename);
+    virtual bool Load(const char* filename, char path_sep);
+    virtual bool Load(const wchar* filename, wchar_t path_sep);
     virtual void* LoadResource(const char* id, char** buf, size_t& bufsize);
     virtual void* LoadResource(const wchar* id, char** buf, size_t& bufsize);
     virtual void FreeResource(void* res);
@@ -72,18 +72,21 @@ namespace RARRES {
 
   protected:
     bool CheckUnpVer();
-    bool ListFiles();
-    void ListFileHeader(FileHeader &hd);
+    bool ListFiles(wchar_t path_sep);
+    void ListFileHeader(FileHeader &hd, wchar_t path_sep);
+    void* Extract(RARRES_FILEHEADER* rhd, char** buf, size_t& bufsize);
 
     CommandData cmd_;
     Archive arc_;
     ComprDataIO dio_;
     Unpack* unp_;
-    std::map<std::string, RES_FILEHEADER* > fileheaders_;
+    std::map<std::string, RARRES_FILEHEADER* > fileheadersA_;
+    std::map<std::wstring, RARRES_FILEHEADER* > fileheadersW_;
 
   private:
     unsigned int  flags_;
     int64 total_packsize_, total_unpsize_;
+    bool ignorecase_;
     DISALLOW_COPY_AND_ASSIGN(CRarRes);
   };
 };
