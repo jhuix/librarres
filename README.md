@@ -14,7 +14,7 @@ RAR文件分析和解压缩采用 [www.rarlab.com](https://www.rarlab.com) 的�
 ```
 JRES::IRes* rarres = JRES::CreateRarRes(true);
 if (rarres) {
-    if (rarres->Load("test.rar", 0)) {
+    if (rarres->Open("test.rar", 0)) {
         char* buf = nullptr;
         size_t bufsize = 0;
         void* res = rarres->LoadResource("skin\\ui\\index.html", &buf, bufsize);
@@ -32,7 +32,7 @@ if (rarres) {
 ```
 JRES::IRes* rarres = JRES::CreateRarRes(false);
 if (rarres) {
-    if (rarres->Load("test.rar", '/')) {
+    if (rarres->Open("test.rar", '/')) {
         IStream* res = rarres->LoadResource("skin/img/caotion.png");
         if (res) {
             //TO DO USE IStream interface methods of "res";
