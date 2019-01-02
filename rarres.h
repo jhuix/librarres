@@ -57,16 +57,18 @@ namespace RARRES {
     explicit CRarRes(bool ignorecase = true);
     ~CRarRes();
 
+    Archive* GetArchive() { return &arc_; }
+
     virtual void Release();
     //path_sep value of 0 is default internal path separator.
     //RAR: default internal path separator is '\\'
-    virtual bool Load(const char* filename, char path_sep);
-    virtual bool Load(const wchar* filename, wchar_t path_sep);
+    virtual bool Open(const char* filename, char path_sep);
+    virtual bool Open(const wchar* filename, wchar_t path_sep);
     virtual void* LoadResource(const char* id, char** buf, size_t& bufsize);
     virtual void* LoadResource(const wchar* id, char** buf, size_t& bufsize);
     virtual void FreeResource(void* res);
     virtual int GetErrorCode();
-    virtual void Clear();
+    virtual void Close();
 #ifdef _WIN32
     virtual IStream* LoadResource(const char* id);
     virtual IStream* LoadResource(const wchar* id);
@@ -89,6 +91,7 @@ namespace RARRES {
     unsigned int  flags_;
     int64 total_packsize_, total_unpsize_;
     bool ignorecase_;
+
     DISALLOW_COPY_AND_ASSIGN(CRarRes);
   };
 };

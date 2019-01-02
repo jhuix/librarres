@@ -27,8 +27,8 @@
 // NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS 
 // SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef _RES_INTERFACE_INCLUDE_
-#define _RES_INTERFACE_INCLUDE_
+#ifndef _JRES_INTERFACE_INCLUDE_
+#define _JRES_INTERFACE_INCLUDE_
 
 #ifdef _WIN32
 #include <objidl.h>
@@ -39,13 +39,13 @@ namespace JRES {
   struct IRes {
     virtual void Release() = 0;
     //path_sep value of 0 is default internal path separator
-    virtual bool Load(const char* filename, char path_sep) = 0;
-    virtual bool Load(const wchar_t* filename, wchar_t path_sep) = 0;
+    virtual bool Open(const char* filename, char path_sep) = 0;
+    virtual bool Open(const wchar_t* filename, wchar_t path_sep) = 0;
     virtual void* LoadResource(const char* id, char** buf, size_t& bufsize) = 0;
     virtual void* LoadResource(const wchar_t* id, char** buf, size_t& bufsize) = 0;
     virtual void FreeResource(void* res) = 0;
     virtual int GetErrorCode() = 0;
-    virtual void Clear() = 0;
+    virtual void Close() = 0;
 #ifdef _WIN32
     virtual IStream* LoadResource(const char* id) = 0;
     virtual IStream* LoadResource(const wchar_t* id) = 0;
@@ -53,4 +53,4 @@ namespace JRES {
   };
 
 };
-#endif  //_RES_INTERFACE_INCLUDE_
+#endif  //_JRES_INTERFACE_INCLUDE_

@@ -42,10 +42,10 @@ namespace RARRES {
   }
 
   CRarRes::~CRarRes() {
-    Clear();
+    Close();
   }
 
-  void CRarRes::Clear() {
+  void CRarRes::Close() {
     if (unp_) {
       delete unp_;
       unp_ = nullptr;
@@ -64,16 +64,16 @@ namespace RARRES {
     delete this;
   }
 
-  bool CRarRes::Load(const char* filename, char path_sep) {
+  bool CRarRes::Open(const char* filename, char path_sep) {
     wchar_t FileName[NM];
     UtfToWide(filename, FileName, ASIZE(FileName));
     wchar_t sep = 0;
     ((char*)&sep)[0] = path_sep;
-    return Load(FileName, sep);
+    return Open(FileName, sep);
   }
 
-  bool CRarRes::Load(const wchar_t* filename, wchar_t path_sep) {
-    Clear();
+  bool CRarRes::Open(const wchar_t* filename, wchar_t path_sep) {
+    Close();
     cmd_.Init();
     cmd_.AddArcName(filename);
     cmd_.Overwrite = OVERWRITE_ALL;
@@ -84,7 +84,6 @@ namespace RARRES {
       ErrHandler.OpenErrorMsg(filename);
       return false;
     }
-
     if (!arc_.IsArchive(true)
       || arc_.GetHeaderType() != HEAD_MAIN) {
       arc_.Close();
