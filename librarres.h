@@ -38,6 +38,8 @@ namespace JRES {
   extern "C" {
 #endif
 
+    const char* PASCAL GetVersion();
+
     JRES::IRes* PASCAL CreateRarRes(bool ignorecase);
 
 #ifdef __cplusplus

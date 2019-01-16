@@ -49,6 +49,10 @@ namespace RARRES {
     int64 Pos;
     int64 PackSize;
     int64 UnpSize;
+    uint64 Mtime;
+    uint64 Ctime;
+    uint32 FileAttr;
+    void* Data;
     std::wstring FileName;
   };
 

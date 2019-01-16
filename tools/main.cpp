@@ -77,7 +77,7 @@ int main(int argc, char *argv[]) {
 //#endif
     if (_stricmp(param, "-x") == 0) {
       if (argc > 4) {
-        if (RARRES::ExtractFile(argv[2], argv[3], argv[4])) {
+        if (RARRES::ExtractFileA(argv[2], argv[3], argv[4])) {
           printf("\nRarRes: 成功解压文件\"");
           printf(argv[3]);
           printf("\"至目标文件\"");

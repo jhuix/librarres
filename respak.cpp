@@ -29,7 +29,7 @@
 
 #include "rar.hpp"
 #include "librespak.h"
-#include "librarres.h"
+#include "rarres.h"
 
 #ifdef RESPAK
 namespace RARRES {
@@ -51,7 +51,23 @@ namespace RARRES {
         dest.Seek(0, SEEK_SET);
         result = dest.Write(buf, size);
       }
+#ifdef _WIN32
+      RARRES_FILEHEADER* rhd = (RARRES_FILEHEADER*)res;
+      if (rhd->Mtime || rhd->Ctime)
+        SetFileTime(dest.GetHandle(), (FILETIME*)&rhd->Ctime, NULL, (FILETIME*)&rhd->Mtime);
       dest.Close();
+      if (rhd->FileAttr)
+      {
+        uint32 attrib = rhd->FileAttr;
+        /* p7zip stores posix attributes in high 16 bits and adds 0x8000 as marker.
+        We remove posix bits, if we detect posix mode field */
+        if ((attrib & 0xF0000000) != 0)
+          attrib &= 0x7FFF;
+        SetFileAttributesA(destfile, attrib);
+      }
+#else
+      dest.Close();
+#endif
     }
     rr->FreeResource(res);
     rr->Release();
@@ -73,7 +89,23 @@ namespace RARRES {
         dest.Seek(0, SEEK_SET);
         result = dest.Write(buf, size);
       }
+#ifdef _WIN32
+      RARRES_FILEHEADER* rhd = (RARRES_FILEHEADER*)res;
+      if (rhd->Mtime || rhd->Ctime)
+        SetFileTime(dest.GetHandle(), (FILETIME*)&rhd->Ctime, NULL, (FILETIME*)&rhd->Mtime);
       dest.Close();
+      if (rhd->FileAttr)
+      {
+        uint32 attrib = rhd->FileAttr;
+        /* p7zip stores posix attributes in high 16 bits and adds 0x8000 as marker.
+        We remove posix bits, if we detect posix mode field */
+        if ((attrib & 0xF0000000) != 0)
+          attrib &= 0x7FFF;
+        SetFileAttributesW(destfile, attrib);
+      }
+#else
+      dest.Close();
+#endif
     }
     rr->FreeResource(res);
     rr->Release();

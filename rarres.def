@@ -2,3 +2,4 @@ EXPORTS
   CreateRarRes
   ExtractFileA
   ExtractFileW
+  GetVersion

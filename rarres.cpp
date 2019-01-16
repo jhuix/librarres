@@ -29,6 +29,7 @@
 
 #include "rar.hpp"
 #include "rarres.h"
+#include "VERSION"
 
 namespace RARRES {
 
@@ -51,8 +52,13 @@ namespace RARRES {
       unp_ = nullptr;
     }
     arc_.Close();
-    for (auto it : fileheadersW_)
+    for (auto it : fileheadersW_) {
+      if (it.second->Data) {
+        free(it.second->Data);
+        it.second->Data = nullptr;
+      }
       delete it.second;
+    }
     fileheadersW_.clear();
     fileheadersA_.clear();
     flags_ = 0;
@@ -172,6 +178,15 @@ namespace RARRES {
       rhd->PackSize = hd.PackSize < 0 ? 0 : hd.PackSize;
       rhd->UnpSize = hd.UnpSize < 0 ? 0 : hd.UnpSize;
       rhd->FileName = hd.FileName;
+#ifdef _WIN32
+      rhd->Mtime = hd.mtime.GetWin();
+      rhd->Ctime = hd.ctime.GetWin();
+#else
+      rhd->Mtime = hd.mtime.GetUnixNS();
+      rhd->Ctime = hd.ctime.GetUnixNS();
+#endif
+      rhd->FileAttr = hd.FileAttr;
+      rhd->Data = nullptr;
       //Path sep default value is L'\\'
       if ((path_sep && path_sep != L'\\')) {
         wchar_t* ch = (wchar_t*)hd.FileName;
@@ -227,7 +242,7 @@ namespace RARRES {
     dio_.UnpVolume = false;
     arc_.Seek(rhd->Pos, SEEK_SET);
 
-    void* result = (void*)-1;
+    void* result = nullptr;
     if (arc_.ReadHeader() > 0) {
       if (!CheckUnpVer()) {
         ErrHandler.SetErrorCode(RARX_FATAL);
@@ -287,7 +302,8 @@ namespace RARRES {
           unp_->DoUnpack(arc_.FileHead.UnpVer, arc_.FileHead.Solid);
       }
     }
-    return result;
+    rhd->Data = result;
+    return rhd;
   }
 
   void* CRarRes::LoadResource(const wchar_t* id, char** buf, size_t& bufsize) {
@@ -358,7 +374,13 @@ namespace RARRES {
 #endif
 
   void CRarRes::FreeResource(void* res) {
-    if (res && res != (void*)-1) free(res);
+    if (res) {
+      RARRES_FILEHEADER* rhd = (RARRES_FILEHEADER*)res;
+      if (rhd->Data) {
+        free(rhd->Data);
+        rhd->Data = nullptr;
+      }
+    }
   }
 
   int CRarRes::GetErrorCode() {
@@ -368,6 +390,10 @@ namespace RARRES {
 };
 
 namespace JRES {
+
+  const char* PASCAL GetVersion() {
+    return PRODUCT_VERSION;
+  }
 
   IRes* PASCAL CreateRarRes(bool ignorecase) {
     return new RARRES::CRarRes(ignorecase);
