@@ -199,7 +199,7 @@ namespace RARRES {
         wchar_t* ch = (wchar_t*)hd.FileName;
         while (*ch) {
           if ((*ch) >= L'A' && (*ch) <= L'Z')
-            *ch = (*ch) + 20;
+            *ch = (*ch) + 32;
           ++ch;
         }
       }
