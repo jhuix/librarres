@@ -72,7 +72,11 @@ namespace RARRES {
 
   bool CRarRes::Open(const char* filename, char path_sep) {
     wchar_t FileName[NM];
+#ifdef _WIN32
+    CharToWide(filename, FileName, ASIZE(FileName));
+#else
     UtfToWide(filename, FileName, ASIZE(FileName));
+#endif
     wchar_t sep = 0;
     ((char*)&sep)[0] = path_sep;
     return Open(FileName, sep);
@@ -205,7 +209,11 @@ namespace RARRES {
       }
       fileheadersW_[hd.FileName] = rhd;
       char NameA[NM];
+#ifdef _WIN32
+      WideToChar(hd.FileName, NameA, ASIZE(NameA));
+#else
       WideToUtf(hd.FileName, NameA, ASIZE(NameA));
+#endif
       fileheadersA_[NameA] = rhd;
     }
   }
