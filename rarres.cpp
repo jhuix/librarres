@@ -209,7 +209,7 @@ namespace RARRES {
       }
       fileheadersW_[hd.FileName] = rhd;
       char NameA[NM];
-#ifdef _WIN32
+#ifdef NO_USE_UTF8
       WideToChar(hd.FileName, NameA, ASIZE(NameA));
 #else
       WideToUtf(hd.FileName, NameA, ASIZE(NameA));
