@@ -11,13 +11,14 @@ FILETYPE VFT_APP
   {
     BLOCK "080404b0"
     {
-      VALUE "CompanyName", "Jhuix\0"
-      VALUE "ProductName", "Rar Res library\0"
-      VALUE "FileDescription", "Rar Res library\0"
-      VALUE "FileVersion", "1.0.0.1227\0"
-      VALUE "ProductVersion", "1.0.0.1227\0"
-      VALUE "LegalCopyright", "Jhuix 2018, Copyright All.\0"
-      VALUE "OriginalFilename", "librarres.dll\0"
+      VALUE "CompanyName", COMPANY_FULLNAME
+      VALUE "ProductName", PRODUCT_FULLNAME
+      VALUE "FileDescription", PRODUCT_FULLNAME
+      VALUE "FileVersion", PRODUCT_VERSION
+      VALUE "ProductVersion", PRODUCT_VERSION
+      VALUE "InternalName", PRODUCT_SHORTNAME
+      VALUE "LegalCopyright", PRODUCT_COPYRIGHT
+      VALUE "OriginalFilename", PRODUCT_FILENAME
     }
   }
   BLOCK "VarFileInfo"
